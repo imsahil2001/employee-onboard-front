@@ -4,12 +4,16 @@ import { EmployeePersonalDataComponent } from './employee-personal-data/employee
 import { ReferencesComponent } from './references/references.component';
 import { GeneralNominationsComponent } from './general-nominations/general-nominations.component';
 import { MedicalComponent } from './medical-insurance/medical.component';
+import { AppComponent4 } from './screen4/app.component'
+import { ChecklistComponent } from './screen5/checklist.component'
 
 const routes: Routes = [
   { path: 'personal-information', component: EmployeePersonalDataComponent },
   { path: 'references', component: ReferencesComponent },
-  { path: 'general-nomination-component', component: GeneralNominationsComponent },
+  { path: 'general-nomination', component: GeneralNominationsComponent },
   { path: 'medical-insurance', component: MedicalComponent },
+  { path: 'screen4', component: AppComponent4 },
+  { path: 'screen5', component: ChecklistComponent },
 
 ];
 

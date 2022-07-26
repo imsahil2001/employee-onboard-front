@@ -1,7 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EmployeePersonalDataService } from './employee-personal-data.service'
+import { MaritalStatus } from './MaritalStatus';
+import { Observable } from 'rxjs';
+import { Gender } from './Gender';
+import { State } from './State';
+import { City } from './Citiy';
 
 
 
@@ -22,37 +28,38 @@ export class EmployeePersonalDataComponent implements OnInit {
 
   // --------------------------------------------
   //select option list
-  maritalStatusList: any[] = [
-    // 'Married',
-    // 'Unmarried',
-    // 'Divorced',
-    // 'Registered Partner',
-    // 'Widowed',
-    // 'Separated',
+
+  currentStateId: number = 0;
+  statesList: State[];
+
+  citiesList: City[] = [
+    {
+      "id": 2,
+      "city": "Patiala",
+      "state_id": 2
+    },
+    {
+      "id": 3,
+      "city": "Bathinda",
+      "state_id": 2
+    }
   ];
 
-  statesList: any[] = [
-  ]
-
-  citiesList: any[] = [
-  ]
-
-  genderList: any[] = [
-    'Male',
-    'Female',
-    'Lesbian',
-    'Gay',
-    'Bisexual',
-    'Transgender',
-  ];
+  genderList: Gender[];
 
 
 
   selectedState: any = '';
 
 
+  currentstate: any = "";
+  emergencystate: any = "";
+  permanentstate: any = "";
+  currentcity: any = "";
+  emergencycity: any = "";
+  permanentcity: any = "";
 
-
+  maritalStatusList: MaritalStatus[];
 
   // --------------------------------------------
   // form group
@@ -60,7 +67,24 @@ export class EmployeePersonalDataComponent implements OnInit {
   requestPayLoad: any = {};
 
   ngOnInit() {
-    // reactive form
+
+    this.userservice.getMaritalStatusFromDb().subscribe(data => {
+      this.maritalStatusList = data;
+      console.log(`marital status gottten`);
+    })
+
+
+    this.userservice.getGenderFromDb().subscribe(data => {
+      this.genderList = data;
+      console.log(`gender list gotten`);
+    })
+
+    this.userservice.getStatesFromDb().subscribe(data => {
+      this.statesList = data;
+      console.log(`state list gotten`);
+    })
+
+
     this.myReactiveForm = new FormGroup({
       FirstName: new FormControl(null, [
         Validators.pattern('[A-Za-z]{1,32}'),
@@ -185,19 +209,19 @@ export class EmployeePersonalDataComponent implements OnInit {
         Validators.required,
       ]),
       currentstate: new FormControl(null, [
-        Validators.pattern('[A-Za-z]{1,32}'),
+        // Validators.pattern('[A-Za-z]{1,32}'),
         Validators.required,
       ]),
       currentcity: new FormControl(null, [
-        Validators.pattern('[A-Za-z]{1,32}'),
+        // Validators.pattern('[A-Za-z]{1,32}'),
         Validators.required,
       ]),
       permanentstate: new FormControl(null, [
-        Validators.pattern('[A-Za-z]{1,32}'),
+        // Validators.pattern('[A-Za-z]{1,32}'),
         Validators.required,
       ]),
       permanentcity: new FormControl(null, [
-        Validators.pattern('[A-Za-z]{1,32}'),
+        // Validators.pattern('[A-Za-z]{1,32}'),
         Validators.required,
       ]),
       institute: new FormControl(null, [Validators.required]),
@@ -292,12 +316,48 @@ export class EmployeePersonalDataComponent implements OnInit {
   // --------------------------------------------
   // select options change functions
   changeMaritalStatus(e: any) {
-    this.myReactiveForm.value.MaritalStatus?.setValue(e.target.value);
+    console.log(`marital`);
+    // this.myReactiveForm.value.MaritalStatus?.setValue(e.target.value);
   }
 
   changeGender(e: any) {
     this.myReactiveForm.value.gender?.setValue(e.target.value);
   }
+
+  currentStateChange(e: any) {
+
+    console.log(this.statesList)
+
+    let currentState = "";
+    if (e.target.value.length == 4) {
+      this.currentStateId = Number(e.target.value[3]);
+    } else {
+      this.currentStateId = Number(e.target.value[3] + e.target.value[4]);
+    }
+
+    this.statesList.forEach((i) => {
+      if (i.id == this.currentStateId) {
+        console.log(i.state)
+        this.myReactiveForm.value.currentstate?.setValue(i.state);
+        this.myReactiveForm.patchValue({ currentstate: `${i.state}` });
+      }
+    })
+
+
+    console.log(this.currentStateId);
+    console.log(this.currentstate.name);
+    console.log(this.myReactiveForm.value);
+
+    // this.userservice.getCitiesFromState(this.currentStateId).subscribe(data => {
+    //   this.citiesList = data;
+    //   console.log(`state list gotten`);
+    // })
+
+    // this.myReactiveForm.value.currentstate?.setValue(e.target.value);
+
+  }
+
+
 
   // --------------------------------------------
   // enable or disable the passport fields on the basis of the checkbox
@@ -380,56 +440,62 @@ export class EmployeePersonalDataComponent implements OnInit {
   // --------------------------------------------
   // checkboxes functions
   isInjuredFcn(e: any) {
-
+    if (e.target.value = "true")
+      e.target.value = true;
     this.myReactiveForm.controls.isInjured?.setValue(e.target.value);
   }
 
   isIllFcn(e: any) {
 
+    if (e.target.value = "true")
+      e.target.value = true;
+
     this.myReactiveForm.controls.isIll?.setValue(e.target.value);
   }
 
   isDisabledFcn(e: any) {
-
+    if (e.target.value = "true")
+      e.target.value = true;
     this.myReactiveForm.controls.isDisabled?.setValue(e.target.value);
   }
 
   isMedicalAlertFcn(e: any) {
-
+    if (e.target.value = "true")
+      e.target.value = true;
     this.myReactiveForm.controls.isMedicalAlert?.setValue(e.target.value);
   }
 
   // --------------------------------------------
   // request to service layer
   onSubmit() {
-    if (sessionStorage.getItem('emp_id') == null) {
+    // if (sessionStorage.getItem('emp_id') == null) {
 
 
-      this.makePayLoad();
-      console.log(this.requestPayLoad);
-      // this.submitted = true;
+    this.makePayLoad();
+    console.log(this.requestPayLoad);
+    // this.submitted = true;
 
-      // if form is invalid it wont get submit
-      // if (this.myReactiveForm.invalid) {
-      //   return;
-      // }
-      console.log('submitted');
+    // if form is invalid it wont get submit
+    // if (this.myReactiveForm.invalid) {
+    //   return;
+    // }
+    console.log('submitted');
 
-      // sending payload to backend
-      this.emp_id = this.userservice.savePersonalDetails(
-        this.requestPayLoad
-      );
+    // sending payload to backend
+    this.emp_id = this.userservice.savePersonalDetails(
+      this.requestPayLoad
+    );
 
-      // setting session storage 
-      sessionStorage.setItem('emp_id', this.requestPayLoad.empId);
-      sessionStorage.setItem('stage', 'PERSONAL_INFO');
-    }
+    // setting session storage 
+    // sessionStorage.setItem('emp_id', this.requestPayLoad.empId);
+    sessionStorage.setItem('stage', 'PERSONAL_INFO');
+    // }
   }
 
   onSubmitAndContinue() {
-    if (sessionStorage.getItem('emp_id') == null) {
-      this.onSubmit();
-    }
+    // if (sessionStorage.getItem('emp_id') == null) {
+    //   this.onSubmit();
+    // }
   }
 
   getCitiesfromState() {
@@ -437,28 +503,16 @@ export class EmployeePersonalDataComponent implements OnInit {
   }
 
   // getting states from db call
-  getStatesFromDb() {
-    console.log(`states clicked`);
-    console.log(this.myReactiveForm.get('currentstate'));
-    // this.statesList.push(this.userservice.getStatesFromDb());
-    this.statesList.push({ id: 1, name: "haryana" });
-    this.statesList.push({ id: 2, name: "punjab" });
-    this.statesList.push({ id: 3, name: "hyderbad" });
-  }
 
-  //change fcn for state
-  selectedStateName() {
-    this.citiesList.push(this.userservice.getCitiesFromStates(this.myReactiveForm.get('currentstate').value));
 
-  }
+
 
   getMaritalStatusFromDb() {
-    console.log("marital status");
-    // this.maritalStatusList.push(this.userservice.getMaritalStatusFromDb());
+    console.log(this.maritalStatusList)
   }
 
   getGenderFromDb() {
-    this.genderList.push(this.userservice.getGenderFromDb());
+    // this.genderList.push(this.userservice.getGenderFromDb());
   }
 
 
@@ -466,7 +520,8 @@ export class EmployeePersonalDataComponent implements OnInit {
   //request payload is made from formGroup 
   makePayLoad() {
     this.requestPayLoad = {
-      empId: "1",
+      empId: 1,
+      // empId: sessionStorage.setItem("empId"),
       fname: this.myReactiveForm.get('FirstName')?.value,
       mname: this.myReactiveForm.get('MiddleName')?.value,
       lname: this.myReactiveForm.get('LastName')?.value,
@@ -478,8 +533,8 @@ export class EmployeePersonalDataComponent implements OnInit {
         {
           address1: this.myReactiveForm.get('CAddress')?.value,
           address2: this.myReactiveForm.get('CAddress1')?.value,
-          city: this.myReactiveForm.get('currentstate')?.value,
-          state: this.myReactiveForm.get('currentcity')?.value,
+          city: this.myReactiveForm.get('currentcity').value,
+          state: this.myReactiveForm.get('currentstate')?.value,
           pincode: this.myReactiveForm.get('CPinCode')?.value,
           addressType: 'current'
         },
@@ -493,24 +548,24 @@ export class EmployeePersonalDataComponent implements OnInit {
         }
       ],
 
-      emergencyname: this.myReactiveForm.get('emergencyName')?.value,
-      emergencyrelation: this.myReactiveForm.get('relation')?.value,
-      emergencyph1: this.myReactiveForm.get('emergencyphone1')?.value,
-      emergencyph2: this.myReactiveForm.get('emergencyphone2')?.value,
-      emergencyaddr1: this.myReactiveForm.get('address1')?.value,
-      emergencyaddr2: this.myReactiveForm.get('address2')?.value,
-      emergencycity: this.myReactiveForm.get('emergencycity')?.value,
-      emergencystate: this.myReactiveForm.get('emergencystate')?.value,
-      emergencypincode: this.myReactiveForm.get('pin')?.value,
-      citizenshipcountry: this.myReactiveForm.get('country')?.value,
-      passportnumber: this.myReactiveForm.get('passport')?.value,
-      passportissuedate: this.myReactiveForm.get('issueddate')?.value,
-      passportexpirydate: this.myReactiveForm.get('expirationdate')?.value,
-      passportissuedby: this.myReactiveForm.get('issuedby')?.value,
-      pannumber: this.myReactiveForm.get('pan')?.value,
-      nameonpan: this.myReactiveForm.get('panname')?.value,
-      aadharnumber: this.myReactiveForm.get('aadhar')?.value,
-      nameonaadhar: this.myReactiveForm.get('aadharname')?.value,
+      emergencyName: this.myReactiveForm.get('emergencyName')?.value,
+      emergencyRelation: this.myReactiveForm.get('relation')?.value,
+      emergencyPh1: this.myReactiveForm.get('emergencyphone1')?.value,
+      emergencyPh2: this.myReactiveForm.get('emergencyphone2')?.value,
+      emergencyAddr1: this.myReactiveForm.get('address1')?.value,
+      emergencyAddr2: this.myReactiveForm.get('address2')?.value,
+      emergencyCity: this.myReactiveForm.get('emergencycity')?.value,
+      emergencyState: this.myReactiveForm.get('emergencystate')?.value,
+      emergencyPincode: this.myReactiveForm.get('pin')?.value,
+      citizenshipCountry: this.myReactiveForm.get('country')?.value,
+      passportNumber: this.myReactiveForm.get('passport')?.value,
+      passportIssuedate: this.myReactiveForm.get('issueddate')?.value,
+      passportExpirydate: this.myReactiveForm.get('expirationdate')?.value,
+      passportIssuedBy: this.myReactiveForm.get('issuedby')?.value,
+      panNumber: this.myReactiveForm.get('pan')?.value,
+      nameOnPan: this.myReactiveForm.get('panname')?.value,
+      aadharNumber: this.myReactiveForm.get('aadhar')?.value,
+      nameOnAadhar: this.myReactiveForm.get('aadharname')?.value,
       qualifications: [
         {
           qualification: this.myReactiveForm.get('qualification')?.value,
@@ -535,7 +590,7 @@ export class EmployeePersonalDataComponent implements OnInit {
           receivedyear: this.myReactiveForm.get('yearReceived')?.value
         }
       ],
-      previousemploymentdetails: [
+      previousEmploymentDetails: [
         {
           from: this.myReactiveForm.get('fromyr')?.value,
           to: this.myReactiveForm.get('toyr')?.value,
@@ -546,14 +601,14 @@ export class EmployeePersonalDataComponent implements OnInit {
       ],
       gender: this.myReactiveForm.get('gender')?.value,
       bloodgroup: this.myReactiveForm.get('BloodGrp')?.value,
-      islivingwithinjury: this.myReactiveForm.get('isInjured')?.value,
-      injurydetails: this.myReactiveForm.get('injuryDetails')?.value,
-      islivingwithillness: this.myReactiveForm.get('isIll')?.value,
-      illnessdetails: this.myReactiveForm.get('illnessDetails')?.value,
-      islivingwithdisability: this.myReactiveForm.get('isDisabled')?.value,
-      disabilitydetails: this.myReactiveForm.get('disabilityDetails')?.value,
-      allergytomedicines: this.myReactiveForm.get('Healthinfo')?.value,
-      medicalalert: this.myReactiveForm.get('isMedicalAlert')?.value
+      isLivingWithInjury: this.myReactiveForm.get('isInjured')?.value,
+      injuryDetails: this.myReactiveForm.get('injuryDetails')?.value,
+      isLivingWithIllness: this.myReactiveForm.get('isIll')?.value,
+      illnessDetails: this.myReactiveForm.get('illnessDetails')?.value,
+      isLivingWithDisability: this.myReactiveForm.get('isDisabled')?.value,
+      disabilityDetails: this.myReactiveForm.get('disabilityDetails')?.value,
+      allergyToMedicines: this.myReactiveForm.get('Healthinfo')?.value,
+      medicalAlert: this.myReactiveForm.get('isMedicalAlert')?.value
     }
   }
 

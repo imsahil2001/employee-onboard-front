@@ -1,18 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LegendHeadingComponent } from './legend-heading.component';
+import { ChecklistComponent } from './checklist.component';
 
-describe('LegendHeadingComponent', () => {
-  let component: LegendHeadingComponent;
-  let fixture: ComponentFixture<LegendHeadingComponent>;
+describe('ChecklistComponent', () => {
+  let component: ChecklistComponent;
+  let fixture: ComponentFixture<ChecklistComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LegendHeadingComponent ]
+      declarations: [ ChecklistComponent ]
     })
     .compileComponents();
+  });
 
-    fixture = TestBed.createComponent(LegendHeadingComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ChecklistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

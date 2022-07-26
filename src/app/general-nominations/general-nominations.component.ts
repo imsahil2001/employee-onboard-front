@@ -200,7 +200,8 @@ export class GeneralNominationsComponent implements OnInit {
     });
 
     var combine = {
-      empId: "101",
+      empId: 1,
+      // empId: sessionStorage.getItem("empId"),
       nominees: [object]
     }
     var json = JSON.stringify(combine);

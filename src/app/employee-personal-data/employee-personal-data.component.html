@@ -113,21 +113,21 @@
             </div>
           </td>
           <td>
+            <!-- (click)="getMaritalStatusFromDb()" -->
             <div class="input_box">
               <select
                 class="select"
                 name=""
                 id=""
                 formControlName="MaritalStatus"
-                (click)="getMaritalStatusFromDb()"
               >
                 <option value="" disabled>Select Marital Status</option>
                 <option
                   *ngFor="let status of maritalStatusList"
-                  [ngValue]="status"
+                  [ngValue]="status.marital_status"
                   (change)="changeMaritalStatus($event)"
                 >
-                  {{ status }}
+                  {{ status.marital_status }}
                 </option>
               </select>
               <label for="" class="date-label">
@@ -216,18 +216,21 @@
 
           <td style="width: 30%">
             <div class="input_box">
+              <!-- (change)="getStatesFromDb()" -->
               <select
-                [(ngModel)]="selectedState"
                 class="select"
                 name=""
                 id=""
                 formControlName="currentstate"
-                (click)="getStatesFromDb()"
-                (change)="getStatesFromDb()"
+                [(ngModel)]="currentstate"
+                (change)="currentStateChange($event)"
               >
-                <option disabled>State</option>
-                <option *ngFor="let state of statesList" [ngValue]="state.name">
-                  {{ state.name }}
+                <option value="" disabled>State</option>
+                <option
+                  *ngFor="let state of statesList"
+                  [ngValue]="state.state"
+                >
+                  {{ state.state }}
                 </option>
               </select>
               <label for="" class="date-label">
@@ -255,8 +258,12 @@
                 name=""
                 id=""
                 formControlName="currentcity"
+                [(ngModel)]="currentcity"
               >
                 <option disabled>City</option>
+                <option *ngFor="let city of citiesList" [ngValue]="city.city">
+                  {{ city.city }}
+                </option>
               </select>
               <label for="" class="date-label">
                 City <span style="color: red">*</span>
@@ -344,8 +351,15 @@
                 name=""
                 id=""
                 formControlName="permanentstate"
+                [(ngModel)]="permanentstate"
               >
-                <option disabled>State</option>
+                <option value="" disabled>State</option>
+                <option
+                  *ngFor="let state of statesList"
+                  [ngValue]="state.state"
+                >
+                  {{ state.state }}
+                </option>
               </select>
               <label for="" class="date-label">
                 State <span style="color: red">*</span>
@@ -372,8 +386,12 @@
                 name=""
                 id=""
                 formControlName="permanentcity"
+                [(ngModel)]="permanentcity"
               >
-                <option disabled>Permanent City</option>
+                <option disabled>City</option>
+                <option *ngFor="let city of citiesList" [ngValue]="city.city">
+                  {{ city.city }}
+                </option>
               </select>
               <label for="" class="date-label">
                 City <span style="color: red">*</span>
@@ -545,8 +563,16 @@
                 name=""
                 id=""
                 formControlName="emergencystate"
+                [(ngModel)]="emergencystate"
+                (change)="currentStateChange($event)"
               >
-                <option disabled>State</option>
+                <option value="" disabled>State</option>
+                <option
+                  *ngFor="let state of statesList"
+                  [ngValue]="state.state"
+                >
+                  {{ state.state }}
+                </option>
               </select>
               <label for="" class="date-label">
                 State <span style="color: red">*</span>
@@ -571,8 +597,12 @@
                 name=""
                 id=""
                 formControlName="emergencycity"
+                [(ngModel)]="emergencycity"
               >
                 <option disabled>City</option>
+                <option *ngFor="let city of citiesList" [ngValue]="city.city">
+                  {{ city.city }}
+                </option>
               </select>
               <label for="" class="date-label">
                 City <span style="color: red">*</span>
@@ -1109,21 +1139,16 @@
       <table class="borderless_table">
         <tr>
           <td>
+            <!-- (click)="getGenderFromDb()" -->
             <div class="input_box">
-              <select
-                class="select"
-                name=""
-                id=""
-                formControlName="gender"
-                (click)="getGenderFromDb()"
-              >
+              <select class="select" name="" id="" formControlName="gender">
                 <option value="">Select a Gender</option>
                 <option
                   *ngFor="let gender of genderList"
-                  [ngValue]="gender"
+                  [ngValue]="gender.gender"
                   (change)="changeGender($event)"
                 >
-                  {{ gender }}
+                  {{ gender.gender }}
                 </option>
               </select>
               <label for="" class="date-label">

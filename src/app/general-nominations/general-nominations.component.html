@@ -402,9 +402,15 @@
         EXIT
       </button>
     </div>
-    <!-- [disabled]="!nomineeForm.valid" -->
+    <!--  -->
     <div>
-      <button type="submit" class="btn btn-primary rounded-0 m-1">SAVE</button>
+      <button
+        type="submit"
+        class="btn btn-primary rounded-0 m-1"
+        [disabled]="!nomineeForm.valid"
+      >
+        SAVE
+      </button>
       <button
         type="button"
         class="btn btn-primary rounded-0 m-1"

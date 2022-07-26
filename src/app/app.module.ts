@@ -10,7 +10,8 @@ import { EmployeePersonalDataComponent } from './employee-personal-data/employee
 import { ReferencesComponent } from './references/references.component';
 import { GeneralNominationsComponent } from './general-nominations/general-nominations.component';
 import { MedicalComponent } from './medical-insurance/medical.component';
-import { LegendHeadingComponent } from './legend-heading/legend-heading.component';
+import { AppComponent4 } from './screen4/app.component';
+import { ChecklistComponent } from './screen5/checklist.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LegendHeadingComponent } from './legend-heading/legend-heading.componen
     ReferencesComponent,
     GeneralNominationsComponent,
     MedicalComponent,
-    LegendHeadingComponent
+    AppComponent4,
+    ChecklistComponent
   ],
   imports: [
     BrowserModule,
