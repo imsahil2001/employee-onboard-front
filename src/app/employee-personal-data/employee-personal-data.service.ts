@@ -22,13 +22,14 @@ export class EmployeePersonalDataService {
 
   savePersonalDetails(data: any) {
 
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     const requestOptions = { headers: new HttpHeaders({ 'content-type': "application/json" }) };
 
     return this.http
       .post<any>(this.baseUrl, JSON.stringify(data), requestOptions)
       .subscribe((response: any) => {
         console.log(response.emp_id);
+        console.log(response);
       });
   }
 

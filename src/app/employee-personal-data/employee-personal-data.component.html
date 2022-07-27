@@ -124,10 +124,10 @@
                 <option value="" disabled>Select Marital Status</option>
                 <option
                   *ngFor="let status of maritalStatusList"
-                  [ngValue]="status.marital_status"
+                  [ngValue]="status.maritalStatus"
                   (change)="changeMaritalStatus($event)"
                 >
-                  {{ status.marital_status }}
+                  {{ status.maritalStatus }}
                 </option>
               </select>
               <label for="" class="date-label">
@@ -537,17 +537,17 @@
           <td style="width: 30%">
             <div class="input_box">
               <input type="text" formControlName="address2" required />
-              <div
+              <!-- <div
                 class="validation_popup"
                 *ngIf="
                   submitted ||
                   (myReactiveForm.get('address2').touched &&
                     myReactiveForm.get('address2').invalid) ||
-                  (submitted && myReactiveForm.get('address2').touchedinvalid)
+                  (submitted && myReactiveForm.get('address2').invalid)
                 "
               >
                 Please enter valid address
-              </div>
+              </div> -->
               <label for="">
                 Address 2 <span style="color: red">*</span>
               </label>

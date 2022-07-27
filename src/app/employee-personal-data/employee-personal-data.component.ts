@@ -71,6 +71,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.userservice.getMaritalStatusFromDb().subscribe(data => {
       this.maritalStatusList = data;
       console.log(`marital status gottten`);
+      // console.log(this.maritalStatusList)
     })
 
 
@@ -262,7 +263,7 @@ export class EmployeePersonalDataComponent implements OnInit {
         Validators.required,
       ]),
       address1: new FormControl(null, Validators.required),
-      address2: new FormControl(null, Validators.required),
+      address2: new FormControl(null),
       pin: new FormControl(null, [
         Validators.pattern('[0-9]{6}'),
         Validators.required,
@@ -316,7 +317,7 @@ export class EmployeePersonalDataComponent implements OnInit {
   // --------------------------------------------
   // select options change functions
   changeMaritalStatus(e: any) {
-    console.log(`marital`);
+    // console.log(`marital`);
     // this.myReactiveForm.value.MaritalStatus?.setValue(e.target.value);
   }
 
@@ -326,7 +327,7 @@ export class EmployeePersonalDataComponent implements OnInit {
 
   currentStateChange(e: any) {
 
-    console.log(this.statesList)
+    // console.log(this.statesList)
 
     let currentState = "";
     if (e.target.value.length == 4) {
@@ -337,16 +338,16 @@ export class EmployeePersonalDataComponent implements OnInit {
 
     this.statesList.forEach((i) => {
       if (i.id == this.currentStateId) {
-        console.log(i.state)
+        // console.log(i.state)
         this.myReactiveForm.value.currentstate?.setValue(i.state);
         this.myReactiveForm.patchValue({ currentstate: `${i.state}` });
       }
     })
 
 
-    console.log(this.currentStateId);
-    console.log(this.currentstate.name);
-    console.log(this.myReactiveForm.value);
+    // console.log(this.currentStateId);
+    // console.log(this.currentstate.name);
+    // console.log(this.myReactiveForm.value);
 
     // this.userservice.getCitiesFromState(this.currentStateId).subscribe(data => {
     //   this.citiesList = data;
@@ -472,13 +473,13 @@ export class EmployeePersonalDataComponent implements OnInit {
 
 
     this.makePayLoad();
-    console.log(this.requestPayLoad);
-    // this.submitted = true;
+    // console.log(JSON.stringify(this.requestPayLoad));
+    this.submitted = true;
 
     // if form is invalid it wont get submit
-    // if (this.myReactiveForm.invalid) {
-    //   return;
-    // }
+    if (this.myReactiveForm.invalid) {
+      return;
+    }
     console.log('submitted');
 
     // sending payload to backend
@@ -559,8 +560,8 @@ export class EmployeePersonalDataComponent implements OnInit {
       emergencyPincode: this.myReactiveForm.get('pin')?.value,
       citizenshipCountry: this.myReactiveForm.get('country')?.value,
       passportNumber: this.myReactiveForm.get('passport')?.value,
-      passportIssuedate: this.myReactiveForm.get('issueddate')?.value,
-      passportExpirydate: this.myReactiveForm.get('expirationdate')?.value,
+      passportIssueDate: this.myReactiveForm.get('issueddate')?.value,
+      passportExpiryDate: this.myReactiveForm.get('expirationdate')?.value,
       passportIssuedBy: this.myReactiveForm.get('issuedby')?.value,
       panNumber: this.myReactiveForm.get('pan')?.value,
       nameOnPan: this.myReactiveForm.get('panname')?.value,
@@ -571,14 +572,14 @@ export class EmployeePersonalDataComponent implements OnInit {
           qualification: this.myReactiveForm.get('qualification')?.value,
           major: this.myReactiveForm.get('major')?.value,
           institute: this.myReactiveForm.get('institute')?.value,
-          yearofcompletion: this.myReactiveForm.get('year')?.value,
-          stateorcountry: this.myReactiveForm.get('qualificationstate')?.value
+          yearOfCompletion: this.myReactiveForm.get('year')?.value,
+          stateOrCountry: this.myReactiveForm.get('qualificationstate')?.value
         }
       ],
       memberships: [
         {
           membership: this.myReactiveForm.get('Membership')?.value,
-          membership_title: this.myReactiveForm.get('OrgMembership')?.value,
+          organizationmembership: this.myReactiveForm.get('OrgMembership')?.value,
           membership_date: this.myReactiveForm.get('membershipdate')?.value
         }
       ],
@@ -596,7 +597,7 @@ export class EmployeePersonalDataComponent implements OnInit {
           to: this.myReactiveForm.get('toyr')?.value,
           location: this.myReactiveForm.get('location')?.value,
           designation: this.myReactiveForm.get('designation')?.value,
-          companyname: this.myReactiveForm.get('companyname')?.value
+          companyName: this.myReactiveForm.get('companyname')?.value
         }
       ],
       gender: this.myReactiveForm.get('gender')?.value,
