@@ -72,7 +72,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.userservice.getMaritalStatusFromDb().subscribe(data => {
       this.maritalStatusList = data;
       console.log(`marital status gottten`);
-      // console.log(this.maritalStatusList)
+      console.log(this.maritalStatusList)
     })
 
 
