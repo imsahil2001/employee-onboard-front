@@ -11,11 +11,15 @@ import { City } from './Citiy';
   providedIn: 'root'
 })
 export class EmployeePersonalDataService {
-  baseUrl = 'http://localhost:8081/batch1_controller/saveEmployeeDetails';
-  statesUrl = 'http://localhost:8081/batch1_controller/StateList';
+  baseUrl = 'http://localhost:8080/hrmsController/employeeDetails/saveEmployeeDetails';
+  // baseUrl = 'http://localhost:8081/batch1_controller/saveEmployeeDetails';
+  // statesUrl = 'http://localhost:8081/batch1_controller/StateList';
+  statesUrl = 'http://localhost:8080/hrmsController/StateList';
   citiesUrl = 'http://localhost:8081/batch1_controller/commonutils/getCities?=';
-  genderUrl = 'http://localhost:8081/batch1_controller/GenderList';
-  maritalStatusUrl = 'http://localhost:8081/batch1_controller/MaritalStatusList';
+  // genderUrl = 'http://localhost:8081/batch1_controller/GenderList';
+  genderUrl = 'http://localhost:8080/hrmsController/GenderList';
+  // maritalStatusUrl = 'http://localhost:8081/batch1_controller/MaritalStatusList';
+  maritalStatusUrl = 'http://localhost:8080/hrmsController/MaritalStatusList';
 
 
   constructor(private http: HttpClient) { }
