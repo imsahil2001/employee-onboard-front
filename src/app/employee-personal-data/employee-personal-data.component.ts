@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EmployeePersonalDataService } from './employee-personal-data.service'
@@ -20,7 +21,7 @@ export class EmployeePersonalDataComponent implements OnInit {
 
   title = 'official_project';
 
-  constructor(private http: HttpClient, private userservice: EmployeePersonalDataService) { }
+  constructor(private http: HttpClient, private userservice: EmployeePersonalDataService, private route: Router) { }
 
   // base url to which request has to be send
   submitted: any = false;
@@ -477,26 +478,33 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.submitted = true;
 
     // if form is invalid it wont get submit
-    if (this.myReactiveForm.invalid) {
-      return;
-    }
+    // if (this.myReactiveForm.invalid) {
+    //   return;
+    // }
     console.log('submitted');
 
     // sending payload to backend
-    this.emp_id = this.userservice.savePersonalDetails(
-      this.requestPayLoad
-    );
+    // this.emp_id = this.userservice.savePersonalDetails(
+    //   this.requestPayLoad
+    // );
 
     // setting session storage 
-    // sessionStorage.setItem('emp_id', this.requestPayLoad.empId);
+    sessionStorage.setItem('emp_id', this.requestPayLoad.empId);
     sessionStorage.setItem('stage', 'PERSONAL_INFO');
+
+    window.alert("data has been saved")
     // }
   }
 
   onSubmitAndContinue() {
-    // if (sessionStorage.getItem('emp_id') == null) {
-    //   this.onSubmit();
-    // }
+    if (sessionStorage.getItem('emp_id') == null) {
+      this.onSubmit();
+      setTimeout(() => {
+        this.route.navigate(['/references']);
+      }, 2500);
+    } else {
+      this.route.navigate(['/references']);
+    }
   }
 
   getCitiesfromState() {

@@ -8,7 +8,7 @@ import { AppComponent4 } from './screen4/app.component'
 import { ChecklistComponent } from './screen5/checklist.component'
 
 const routes: Routes = [
-  { path: 'personal-information', component: EmployeePersonalDataComponent },
+  { path: '', component: EmployeePersonalDataComponent },
   { path: 'references', component: ReferencesComponent },
   { path: 'general-nomination', component: GeneralNominationsComponent },
   { path: 'medical-insurance', component: MedicalComponent },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 import { FileuploadService } from './fileupload.service';
+import { Request } from './request.component';
 import { Response } from './response.component';
 
 @Component({
@@ -10,8 +11,10 @@ import { Response } from './response.component';
 })
 export class AppComponent4 implements OnInit {
   file: File = null;
+  base: string;
+  emp: string;
   requestPayLoad: any = {};
-  requestPayLoad2: any = {};
+  requestPayLoad2: Request = { emp_id: "1" };
 
   base64Output: string;
 
@@ -23,15 +26,28 @@ export class AppComponent4 implements OnInit {
 
   }
 
+  savedownloadpdf: Response = {
 
-  //     emp_id:"",
-  // status:"",
-  // pfDoc:""
+    emp_id: "",
+    status: "",
+    pfDoc: ""
 
-  //   };
+  }
+
+  //   constructor(private fileUploadService: FileuploadService, public http: HttpClient, private apiService: ApicallService) { }
+  //   ngOnInit(): void {
+
+  //   }
+
+  //  user: any = {};
+
+  //   createUser(){
+  //     this.apiService.createUsers(this.user).subscribe((res)=>{
+  //     });
+  //   }
+
   constructor(private fileUploadService: FileuploadService) { }
   ngOnInit(): void {
-
   }
   title = 'pf_forms';
 
@@ -44,7 +60,7 @@ export class AppComponent4 implements OnInit {
 
   modifiedDate: String = "";
   downloadbutton: boolean = false;
-
+  removebutton: boolean = true;
 
 
   // On file Select file from computer
@@ -85,12 +101,11 @@ export class AppComponent4 implements OnInit {
   //sending entity empid and base 64 string to backend
   onUpload() {
     this.downloadbutton = true;
+    this.removebutton = false;
 
     console.log(this.file);
     this.requestPayLoad = {
-      empId: 1,
-      // empId: sessionStorage.getItem("emp_id"),
-
+      empId: "1",
       pfDoc: this.base64Output
     }
     console.log(this.requestPayLoad);
@@ -120,23 +135,24 @@ export class AppComponent4 implements OnInit {
     link.download = `${fileName}`
     link.click();
   }
-  onClickDownloadPdf() {
-    // this.requestPayLoad2={
-    //   empId:"1"
-    // }
-    // console.log(this.requestPayLoad2);
-    // this.fileUploadService.savedownloadpdf
-    // {
-    //   this.requestPayLoad2;
-    // }
-    console.log("djsfb");
-    this.fileUploadService.getPdfDetails().subscribe((data: Response) => {
+
+  public onClickDownloadPdf() {
+
+    console.log(this.requestPayLoad2);
+
+
+    this.fileUploadService.savedownloadpdf(this.requestPayLoad2).subscribe(async (data: Response) => {
       console.log(data);
-      this.getPdfdetails.emp_id = data.emp_id;
-      this.getPdfdetails.status = data.status;
-      this.getPdfdetails.pfDoc = data.pfDoc;
-    });
-    this.downloadPdf(this.getPdfdetails.pfDoc, this.getPdfdetails.emp_id + "_PfForm");
+      this.savedownloadpdf.emp_id = data.emp_id;
+      this.savedownloadpdf.status = data.status;
+      this.savedownloadpdf.pfDoc = data.pfDoc;
+      console.log(this.savedownloadpdf.pfDoc);
+
+      this.base = this.savedownloadpdf.pfDoc;
+      this.emp = this.savedownloadpdf.emp_id + "_PfForm";
+      await this.downloadPdf(this.base, this.emp);
+
+    })
 
   }
 }
