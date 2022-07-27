@@ -122,12 +122,19 @@
                 formControlName="MaritalStatus"
               >
                 <option value="" disabled>Select Marital Status</option>
-                <option
+                <!-- <option
                   *ngFor="let status of maritalStatusList"
                   [ngValue]="status.maritalStatus"
                   (change)="changeMaritalStatus($event)"
                 >
                   {{ status.maritalStatus }}
+                </option> -->
+                <option
+                  *ngFor="let status of maritalStatusList"
+                  [ngValue]="status.martialStatus"
+                  (change)="changeMaritalStatus($event)"
+                >
+                  {{ status.martialStatus }}
                 </option>
               </select>
               <label for="" class="date-label">
