@@ -1,11 +1,11 @@
-<div class="box">
+<div class="box" style="padding-left: 18px;  padding-right: 18px;" >
 <h2 class="gn">PF Forms</h2>
 
 <br>
 <input type="file" class="file-upload" (change)="onChange($event)" accept=".pdf">
 <br>
 <br>
-<table class="table2">
+<table class="table2" style="width: 100%;">
   <tr>
     <th>DOCUMENT<br><br>NAME</th>
    
@@ -17,7 +17,7 @@
   </tr>
 <tr>
   <td>{{name}}</td>
-<td>empid</td>
+<td style="padding-left: 50px;">{{requestPayLoad2.emp_id}}</td>
 <td colspan="4">{{modifiedDate}}</td>
 <td colspan="2">{{size}} KB</td>
 <td colspan="2"><a  (click)="onPreview()" >Preview</a></td>
@@ -41,7 +41,7 @@
 <div id="box2">
   <button class="save" (click)="onUpload()">SAVE</button>
   &nbsp;
-  <button class="continue">SAVE & CONTINUE</button>
+  <button class="continue" (click)="saveandcontinue()">SAVE & CONTINUE</button>
 </div>
 <div id="box3">
   <button class="exit">EXIT</button>

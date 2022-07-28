@@ -3,6 +3,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { FileuploadService } from './fileupload.service';
 import { Request } from './request.component';
 import { Response } from './response.component';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent4 implements OnInit {
   base: string;
   emp: string;
   requestPayLoad: any = {};
-  requestPayLoad2: Request = { emp_id: "1" };
+  requestPayLoad2: Request = { emp_id: sessionStorage.getItem("emp_id") };
 
   base64Output: string;
 
@@ -46,7 +47,7 @@ export class AppComponent4 implements OnInit {
   //     });
   //   }
 
-  constructor(private fileUploadService: FileuploadService) { }
+  constructor(private fileUploadService: FileuploadService, private route: Router) { }
   ngOnInit(): void {
   }
   title = 'pf_forms';
@@ -105,13 +106,15 @@ export class AppComponent4 implements OnInit {
 
     console.log(this.file);
     this.requestPayLoad = {
-      empId: "1",
+      empId: sessionStorage.getItem("emp_id"),
       pfDoc: this.base64Output
     }
     console.log(this.requestPayLoad);
     this.fileUploadService.savePdfDetails(
       this.requestPayLoad
     );
+
+    window.alert("File has been uploaded")
 
   }
   onPreview() {
@@ -154,5 +157,10 @@ export class AppComponent4 implements OnInit {
 
     })
 
+  }
+
+  saveandcontinue(){
+    console.log('hi');
+    this.route.navigate(['/screen5']);
   }
 }

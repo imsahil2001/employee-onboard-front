@@ -49,9 +49,14 @@
     border-color: #b8b7b7;
     line-height: 2em;
     padding: 0px;
+    border-radius: 0px;
+    outline: none !important;
     /* font-size: 14px; */
   }
-  
+  input:focus {
+    outline: none;
+    box-shadow: none;
+  }
   input::placeholder{
     color: #a9a7a7;
     font-size: 12px;

@@ -33,13 +33,14 @@ export class ReferencesComponent implements OnInit {
     private router: Router
   ) { }
   ngOnInit(): void {
-    // this.getReferences();
+    this.getReferences();
     // this.id = sessionStorage.getItem();
   }
 
+   emp_id =Number(sessionStorage.getItem("emp_id"));
   public getReferences(): void {
     // this.referenceService.getReferences(this.id).subscribe(
-    this.referenceService.getReferences(1).subscribe(
+    this.referenceService.getReferences(this.emp_id).subscribe(
       (response: any) => {
         this.references[0].name = response.references[0].name;
         this.references[0].designation = response.references[0].designation;
@@ -149,7 +150,9 @@ export class ReferencesComponent implements OnInit {
   }
 
   gotoNominee() {
-    this.router.navigate(['/nominee']);
+    window.alert("References have been saved")
+    this.router.navigate(['/general-nomination']);
+    sessionStorage.setItem("stage","REFERENCES SAVED");
   }
   gotoHome() {
     this.router.navigate(['/home']);

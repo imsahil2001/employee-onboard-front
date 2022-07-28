@@ -18,11 +18,19 @@ export class GeneralNominationsComponent implements OnInit {
 
   }
   async onNext(): Promise<void> {
-    await new Promise<void>(done => setTimeout(() => done(), 2000));
-    this.submitForm();
+    
+    if(sessionStorage.getItem('stage') == 'NOMINEE SAVED'){
+      await new Promise<void>(done => setTimeout(() => done(), 2000));
+      this.router.navigate(['/screen4']);
+      
+    }else{
+      await new Promise<void>(done => setTimeout(() => done(), 2000));
+      this.submitForm();
+      await new Promise<void>(done => setTimeout(() => done(), 2000));
+      this.router.navigate(['/screen4']);
 
-    await new Promise<void>(done => setTimeout(() => done(), 2000));
-    this.router.navigate(['/screen4']);
+    }
+
   }
   // latest_date =  this.datepipe.transform(this.d , 'dd-mm-yyyy')
   public validationMessages = {
@@ -199,15 +207,16 @@ export class GeneralNominationsComponent implements OnInit {
 
     });
 
+    // http://localhost:8080/nomineecontroller/nominee/saveNomineeDetails
     var combine = {
-      empId: 1,
-      // empId: sessionStorage.getItem("empId"),
+      // empId: 1,
+      empId: sessionStorage.getItem("emp_id"),
       nominees: [object]
     }
     var json = JSON.stringify(combine);
     console.log(json);
     this.http
-      .post('http://localhost:8080/nomineecontroller/nominee/saveNomineeDetails', json, { headers: { 'Content-Type': 'application/json' }, })
+      .post('http://localhost:8080/hrmsController/nominee/saveNomineeDetails', json, { headers: { 'Content-Type': 'application/json' }, })
       .subscribe({
         //next: (response) => console.log(response),
         next: (response) => this.res = response,
@@ -222,6 +231,7 @@ export class GeneralNominationsComponent implements OnInit {
       alert("Saved Successfully");
 
     localStorage.setItem('nomineedetails', json);
+    sessionStorage.setItem('stage','NOMINEE SAVED')
 
   }
 

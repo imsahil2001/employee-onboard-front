@@ -558,7 +558,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.myReactiveForm.controls.toyr.setValue("2012");
     this.myReactiveForm.controls.designation.setValue("intern");
     this.myReactiveForm.controls.location.setValue("hyderbad");
-    this.myReactiveForm.controls.qualification.setValue("MBA");
+    this.myReactiveForm.controls.qualification.setValue("Masters");
     this.myReactiveForm.controls.major.setValue("major");
     this.myReactiveForm.controls.Membership.setValue("membership");
     this.myReactiveForm.controls.OrgMembership.setValue("OrgMembership");

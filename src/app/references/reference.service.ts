@@ -11,16 +11,18 @@ export class ReferenceService {
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
-  public getReferences(id: Number): Observable<Reference[]> {
+  public getReferences(id: any): Observable<Reference[]> {
     let obj = {
       "emp_id": id,
+
     }
     return this.http.post<Reference[]>(`${this.apiServerUrl}/getReferences`, obj);
   }
 
   public addReferences(references: Reference): Observable<Reference> {
     let obj = {
-      "empId": "1",
+      // "empId": "1",
+      "empId": sessionStorage.getItem("emp_id"),
       "references": [
         {
           "name": references.name,

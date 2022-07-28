@@ -1,10 +1,7 @@
-<body>
+<!-- <body> -->
   <form [formGroup]="medicalForm">
     <div class="box">
-      <div class="legend-heading">
-        <p>Medical Insurance</p>
-        <hr />
-      </div>
+
       <div class="form_container">
         <h4>COVERED PERSONS AND PREMIUM CALCULATION</h4>
         <table class="borderless_table">
@@ -12,17 +9,16 @@
             <td>
               <div class="input_box">
                 <input
-                  formControlName="firstName"
-                  type="text"
-                  id="firstName"
+                  formControlName='firstName'
+                  type='text'
+                  id='firstName'
                   required
                 />
-                <div
+                 <div
                   *ngIf="
                     medicalForm.get('firstName')?.invalid &&
                     medicalForm.get('firstName').touched
-                  "
-                  style="color: red"
+                  "style="color: red"
                 >
                   Please enter valid first Name input
                 </div>
@@ -41,18 +37,13 @@
             </td> -->
             <td>
               <div class="input_box">
-                <input type="text" formControlName="last" required />
+                <input type="text" formControlName='last' required />
 
                 <div
-                  *ngIf="
-                    medicalForm.get('last')?.invalid &&
-                    medicalForm.get('last').touched
-                  "
-                  style="color: red"
-                >
-                  Please enter valid Last Name input<span style="color: red"
-                    >*</span
-                  >
+                  *ngIf="medicalForm.get('last')?.invalid && medicalForm.get('last').touched "style = "color: red"
+
+                 >
+                  Please enter valid Last Name input<span  style="color: red">*</span>
                 </div>
 
                 <label for="">
@@ -64,18 +55,13 @@
             <!-- //CHANGES -->
             <td>
               <div class="input_box">
-                <input type="text" formControlName="idtype" required />
+                <input type="text" formControlName='idtype' required />
 
                 <div
-                  *ngIf="
-                    medicalForm.get('idtype')?.invalid &&
-                    medicalForm.get('idtype').touched
-                  "
-                  style="color: red"
-                >
-                  Please enter valid Last Name input<span style="color: red"
-                    >*</span
-                  >
+                  *ngIf="medicalForm.get('idtype')?.invalid && medicalForm.get('idtype').touched "style = "color: red"
+
+                 >
+                  Please enter valid Last Name input<span  style="color: red">*</span>
                 </div>
 
                 <label for="">
@@ -84,7 +70,8 @@
               </div>
             </td>
           </tr>
-          <!--  -->
+<!--  -->
+
 
           <tr>
             <td>
@@ -98,7 +85,7 @@
                 <label for="" class="date-label">
                   Date of Birth(Dob) <span style="color: red">*</span>
                 </label>
-                <div
+                 <div
                   class="validation_popup"
                   *ngIf="
                     !medicalForm.get('Dob').valid &&
@@ -118,7 +105,7 @@
                   id="username"
                   required
                 />
-                <div
+                 <div
                   class="validation_popup"
                   *ngIf="
                     medicalForm.get('age').invalid &&
@@ -127,7 +114,9 @@
                 >
                   Please enter valid age
                 </div>
-                <label for=""> Age <span style="color: red">*</span> </label>
+                <label for="">
+                  Age <span style="color: red">*</span>
+                </label>
               </div>
             </td>
             <!-- <td>
@@ -149,15 +138,10 @@
             </td> -->
             <td>
               <div class="input_box">
-                <select
-                  formControlName="gender"
-                  class="select"
-                  name="as"
-                  id="jhg"
-                >
-                  <option value="">
-                    Gender <span style="color: red">*</span>
-                  </option>
+                <select formControlName="gender" class="select" name="as" id="jhg">
+                  <option value="">Gender <span style="color: red">*</span></option>
+
+
 
                   <option value="">Male</option>
                   <option value="">Female</option>
@@ -180,7 +164,7 @@
                 id="username"
                 required
               />
-              <div
+               <div
                 class="validation_popup"
                 *ngIf="
                   medicalForm.get('relationship').invalid &&
@@ -203,7 +187,7 @@
                 id="username"
                 required
               />
-              <div
+               <div
                 class="validation_popup"
                 *ngIf="
                   medicalForm.get('premium').invalid &&
@@ -212,7 +196,9 @@
               >
                 Please enter a valid premium
               </div>
-              <label for=""> Premium <span style="color: red">*</span> </label>
+              <label for="">
+                Premium <span style="color: red">*</span>
+              </label>
             </div>
           </td>
 
@@ -224,7 +210,7 @@
                 id="username"
                 required
               />
-              <div
+               <div
                 class="validation_popup"
                 *ngIf="
                   medicalForm.get('idnumber').invalid &&
@@ -261,163 +247,121 @@
         </table>
       </div>
 
-      <form>
-        <h4>MEDICAL HISTORY</h4>
-        <div class="div1">
-          <div class="div2">
-            <p>
-              Does any of the Covered Person have any serious pre-exsiting
-              physical or mental <br />conditions?
-            </p>
-            <br />
-          </div>
-          <div class="div3">
-            <input
-              type="text"
-              name="medicalHistoryDetails"
-              formControlName="medicalHistoryDetails"
-            />
-            <label>If yes, please specify</label>
-          </div>
+
+
+
+
+
+    <form>
+
+      <h4>MEDICAL HISTORY</h4>
+      <div class="div1">
+        <div class="div2">
+          <p>Does any of the Covered Person have any serious pre-exsiting physical or mental
+            <br>conditions?
+          </p><br>
         </div>
-        <label for="yes"
-          ><input
-            type="radio"
-            id="yes"
-            name="isHaveMedicalHistory"
-            value="true"
-            formControlName="isHaveMedicalHistory"
-          />Yes</label
-        >
+        <div class="div3">
+          <input type="text"  name="medicalHistoryDetails" formControlName="medicalHistoryDetails">
+          <label>If yes, please specify</label>
+        </div>
+      </div>
+      <label for="yes"><input type="radio" id="yes" name="isHaveMedicalHistory" value="true" formControlName="isHaveMedicalHistory">Yes</label>
 
-        <label for="no"
-          ><input
-            type="radio"
-            id="no"
-            name="isHaveMedicalHistory"
-            value="false"
-            formControlName="isHaveMedicalHistory"
-          />No</label
-        ><br />
-        <h4>WAIVER OF INSURANCE COVERAGE</h4>
-        <p>
-          I DECLINE to apply for Group Health Insurance coverage because of
-          <input
-            type="radio"
-            id="spouse"
-            name="insuranceWaiverType"
-            value="spouse"
-            formControlName="insuranceWaiverType"
-          />
-          <label for="spouse">Spousal Coverage</label>
-        </p>
-        <br />
-        <input
-          type="radio"
-          id="indi"
-          name="insuranceWaiverType"
-          value="indi"
-          formControlName="insuranceWaiverType"
-        />
-        <label for="indi">Individual Coverage</label>
-        <input
-          type="radio"
-          id="other"
-          name="insuranceWaiverType"
-          value="other"
-          formControlName="insuranceWaiverType"
-        />
-        <label for="other">Other</label><br /><br />
 
-        <label for=" check"
-          ><input type="checkbox" id="check" name="check" value="check" />I
-          understand that this waiver of coverage may affect the ability to
-          obtain coverage at a later date.</label
-        >
 
-        <h4 class="gn">CONDITIONS OF ENROLLMENT</h4>
-        <!-- <form class="form2"> -->
+      <label for="no"><input type="radio" id="no" name="isHaveMedicalHistory" value="false"formControlName="isHaveMedicalHistory">No</label><br>
+      <h4>WAIVER OF INSURANCE COVERAGE</h4>
+      <p>I DECLINE to apply for Group Health Insurance coverage because of <input type="radio" id="spouse" name="insuranceWaiverType"
+          value="spouse"formControlName="insuranceWaiverType">
+        <label for="spouse">Spousal Coverage</label>
+      </p><br>
+      <input type="radio" id="indi" name="insuranceWaiverType" value="indi"formControlName="insuranceWaiverType">
+      <label for="indi">Individual Coverage</label>
+      <input type="radio" id="other" name="insuranceWaiverType" value="other"formControlName="insuranceWaiverType">
+      <label for="other">Other</label><br><br>
+
+      <label for=" check"><input type="checkbox" id="check" name="check" value="check">I understand that this waiver of coverage may affect the ability to obtain coverage at a later
+        date.</label>
+
+      <h4 class="gn">CONDITIONS OF ENROLLMENT</h4>
+      <!-- <form class="form2"> -->
         <label class="L1" for="one">
-          <input type="checkbox" id="one" name="one" value="one" />
-          I UNDERSTAND that providing false, incomplete, inaccurate or incorrect
-          information to any of the questions on this Enrollment Form may be
-          considered insurance fraud and may result in denial or cancellation of
-          coverage. </label
-        ><br />
+          <input type="checkbox" id="one" name="one" value="one">
+          I UNDERSTAND that providing false, incomplete, inaccurate or incorrect information to any of the questions on
+          this Enrollment Form may be considered insurance fraud and may result in denial or cancellation of coverage.
+        </label><br>
+
 
         <label for="two">
-          <input type="checkbox" id="two" name="two" value="two" />
-          I HEREBY AUTHORIZE Jocata to make any required payroll deductions for
-          this coverage and I understand that once enrolled I cannot remove
-          myself or any covered person until the next enrollment period (unless
-          death or divorce).</label
-        ><br />
+          <input type="checkbox" id="two" name="two" value="two">
+          I HEREBY AUTHORIZE Jocata to make any required payroll deductions for this coverage and I understand that once
+          enrolled I cannot remove myself or any covered person until the next enrollment period (unless death or
+          divorce).</label><br>
+
 
         <label for="three">
-          <input type="checkbox" id="three" name="three" value="three" />
-          I UNDERSTAND that Jocata does not provide any additional
-          company-sponsored medical insurance. Insurance terminated on an
-          employee's last working day. </label
-        ><br />
+          <input type="checkbox" id="three" name="three" value="three">
+          I UNDERSTAND that Jocata does not provide any additional company-sponsored medical insurance. Insurance
+          terminated on an employee's last working day.
+        </label><br>
+
 
         <label for="four">
-          <input type="checkbox" id="four" name="four" value="four" />
-          I CERTIFY that the information provided herein is true and correct. </label
-        ><br />
+          <input type="checkbox" id="four" name="four" value="four">
+          I CERTIFY that the information provided herein is true and correct.
+        </label><br>
+
+
+
 
         <label for="five">
-          <input type="checkbox" id="five" name="five" value="five" />
-          I UNDERSTAND the enrollment details and restrictions in the SBI Policy
-          and SBI Employee Benefits Manual. </label
-        ><br />
+          <input type="checkbox" id="five" name="five" value="five">
+          I UNDERSTAND the enrollment details and restrictions in the SBI Policy and SBI Employee Benefits Manual.
+        </label><br>
+
 
         <label for="six">
-          <input type="checkbox" id="six" name="six" value="six" />
-          I UNDERSTAND that this is an application only. No right is given to me
-          or any person listed on this application until SBI General Insurance
-          Company accepts me/us and premiums are paid. </label
-        ><br />
+          <input type="checkbox" id="six" name="six" value="six">
+          I UNDERSTAND that this is an application only. No right is given to me or any person listed on this application
+          until SBI General Insurance Company accepts me/us and premiums are paid.
+        </label><br>
+
 
         <label for="seven">
-          <input type="checkbox" id="seven" name="seven" value="seven" />I AGREE
-          that if I or a family member has a medical issue which is serious in
-          nature I will coordinate with Admin and SBI regarding coverage before
-          confirming enrollment. </label
-        ><br />
+          <input type="checkbox" id="seven" name="seven" value="seven">I AGREE that if I or a family member has a medical
+          issue which is serious in nature I will coordinate with Admin and SBI regarding coverage before confirming
+          enrollment.
+        </label><br>
+
+
 
         <label for="eight">
-          <input type="checkbox" id="eight" name="eight" value="eight" />I
-          ACKNOWLEDGE that the Medical History section of this Enrollment Form
-          is true and complete for me and for each person applying for coverage.
-          Each person applying for coverage is in good health, except for those
-          conditions listed. </label
-        ><br />
+          <input type="checkbox" id="eight" name="eight" value="eight">I ACKNOWLEDGE that the Medical History section of
+          this Enrollment Form is true and complete for me and for each person applying for coverage. Each person applying
+          for coverage is in good health, except for those conditions listed.
+        </label><br>
 
         <h4 class="gn">SIGNATURE OF ENROLLING EMPLOYEE</h4>
 
         <div>
-          <label for="checkbox"
-            ><input type="checkbox" id="check" name="checkbox" />I understandand
-            agree that the coverage I/we am/ are applying for is subject to the
-            group eligibility and enrollment requirements. I have read the
-            conditions of the Enrollment. I understand and agree to them.</label
-          >
-        </div>
-        <br />
 
-        <!-- <div class="div4">
+        <label for="checkbox"><input type="checkbox" id="check" name="checkbox">I understandand agree that the coverage I/we am/ are applying for is subject to the group eligibility and enrollment requirements. I have read the conditions of the Enrollment. I understand and agree to them.</label>
+      </div><br>
+
+      <!-- <div class="div4">
        <input type="date" id="d" name="d">
        <label for="date">Date</label>
   </div> -->
 
-        <div class="input_box">
-          <!-- <input
+  <div class="input_box">
+    <!-- <input
       formControlName="DOB"
       onfocus="(this.type='date')"
       type="text"
       required
     /> -->
-          <!-- <input type="date" style="width: 500px;" formControlName="date"
+    <!-- <input type="date" style="width: 500px;" formControlName="date"
     onfocus="(this.type='date')"
     type="text"
     required>
@@ -433,37 +377,40 @@
                 >
                   Please enter valid date
                 </div>  -->
-          <div class="input_box prc">
-            <input
-              formControlName="date"
-              onfocus="(this.type='date')"
-              type="text"
-              required
-            />
-            <label for="" class="date-label">
-              Date <span style="color: red">*</span>
-            </label>
-            <div
-              class="validation_popup"
-              *ngIf="
-                !medicalForm.get('date').valid &&
-                medicalForm.get('date').touched
-              "
-            >
-              Please enter valid Date
-            </div>
-          </div>
-        </div>
-      </form>
-      <!-- </form> -->
-    </div>
-    <div class="buttons">
-      <div id="box2">
-        <button class="exit">EXIT</button>
-        <button (click)="savemedical()" class="save">SAVE</button>
-        &nbsp;
-        <button class="continue">SAVE & CONTINUE</button>
-      </div>
-    </div>
+                <div class="input_box prc">
+                  <input
+                    formControlName="date"
+                    onfocus="(this.type='date')"
+                    type="text"
+                    required
+                  />
+                  <label for="" class="date-label">
+                    Date  <span style="color: red">*</span>
+                  </label>
+                   <div
+                    class="validation_popup"
+                    *ngIf="
+                      !medicalForm.get('date').valid &&
+                      medicalForm.get('date').touched
+                    "
+                  >
+                    Please enter valid Date
+                  </div>
+                </div>
+
+              </div>
+
   </form>
-</body>
+<!-- </form> -->
+</div>
+  <div class="buttons">
+    <div id="box2">
+      <button  class="exit">EXIT</button>
+      <button (click)="savemedical()" class="save">SAVE</button>
+      &nbsp;
+      <button class="continue">SAVE & CONTINUE</button>
+    </div>
+
+    </div>
+    </form>
+  <!-- </body> -->

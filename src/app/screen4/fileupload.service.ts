@@ -9,8 +9,8 @@ import { Response } from './response.component';
   providedIn: 'root',
 })
 export class FileuploadService {
-  savebaseUrl = 'http://localhost:8080/hrmscontroller/employee/pf/saveUploadedPFDoc';
-  getpdfbaseurl='http://localhost:8080/hrmscontroller/employee/pf/downloadUploadedPFDoc';
+  savebaseUrl = 'http://localhost:8080/hrmsController/employee/pf/saveUploadedPFDoc';
+  getpdfbaseurl='http://localhost:8080/hrmsController/employee/pf/downloadUploadedPFDoc';
   httpClient: any;
 
   constructor(private http: HttpClient) { }
